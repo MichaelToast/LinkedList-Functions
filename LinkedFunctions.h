@@ -10,4 +10,4 @@ IntNode* GetNext(IntNode* thisNode);
 void InsertAfter(IntNode* thisNode, IntNode* newNode);
 int IndexOf(IntNode* headNode, int target);
 void deallocate(IntNode* head);
-int returnLength(IntNode* head)
+int returnLength(IntNode* head);

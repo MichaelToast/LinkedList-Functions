@@ -5,8 +5,8 @@
 void defaultSearch();
 void printList(IntNode* head);
 void iterativeReverse(IntNode** head);
+void removeElement(IntNode* head, IntNode* target);
 IntNode* recursiveReverse(IntNode* head);
-int returnLength(IntNode* head);
 
 int main() {
   IntNode* headNode;
@@ -34,7 +34,6 @@ int main() {
   //recursiveReverse(headNode);
   printList(lastNode);
   
-
   deallocate(headNode);
   return 0;
 }
@@ -108,4 +107,31 @@ IntNode* recursiveReverse(IntNode* head) {
   head -> nextNodePtr -> nextNodePtr = head; 
   head -> nextNodePtr = NULL;
   return rest;
+}
+
+void removeElement(IntNode* head, IntNode* target) {
+  IntNode* temp = head;
+  if (head == target) { 
+    // If they want to remove the first element:
+    temp = head;
+    head = head -> nextNodePtr;
+  }
+  else if (target -> nextNodePtr == NULL) {
+    // If they want to remove the last element:
+    while (temp -> nextNodePtr != target) { 
+      //They have given the last node, now finding node before it
+      temp = temp -> nextNodePtr;
+    }
+    temp -> nextNodePtr = NULL;
+  }
+  else {
+    // if they want to remove an element in the middle:
+    while (temp -> nextNodePtr != target) { 
+    temp = temp -> nextNodePtr;    
+    }
+    temp -> nextNodePtr = target -> nextNodePtr;
+  }
+
+  free(target);
+  return;
 }
