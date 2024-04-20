@@ -1,0 +1,1 @@
+A simple collection of all of the Linked List operations I have learned both on my own and in my classes, meant to help others learn the concepts. 

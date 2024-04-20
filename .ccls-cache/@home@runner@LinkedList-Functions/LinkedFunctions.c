@@ -3,78 +3,80 @@
 
 #include "LinkedFunctions.h"
 
-
-void InitializeIntNode(int dataInit, IntNode* thisNode) {
-  /* Set the Value to dataInit and set the next node to NULL */
-   thisNode->dataVal = dataInit;
-   thisNode->nextNodePtr = NULL;
-}
-
-int GetNodeData(IntNode* thisNode) {
-  return thisNode->dataVal;
-}
-
-IntNode* GetNext(IntNode* thisNode) {
-  /* Returns the Pointer to the next node */
-  return thisNode->nextNodePtr;
-}
-
-/* Insert node after this node.
-   Before: this -- next
-   After:  this -- node -- next
-*/
-void InsertAfter(IntNode* thisNode, IntNode* newNode) {
-  /* Inserts the newNode inbetween other nodes*/
-  IntNode* tempNext = NULL;
-
-  tempNext = thisNode->nextNodePtr;
-  thisNode->nextNodePtr = newNode;
-  newNode->nextNodePtr = tempNext;
-}
-
-int IndexOf(IntNode* headNode, int target) {
-  /* Finds what number node that the Target Appears */
-  int valIndex = 0;
-  IntNode* tempNext = NULL; //Item we are using to search
-  tempNext = headNode->nextNodePtr;
-
-  //If the list itself is negative from the begining
-  if (headNode -> nextNodePtr == NULL) {
-      return -1;
+List initalizeList(int* errorCode) {
+  List list;
+  list.lstruct = malloc(sizeof(listInfo));
+  if (list.lstruct == NULL) {
+    //Failed to allocate memory
+    *errorCode = 1;
+    return list;
   }
 
-  while (tempNext -> nextNodePtr != NULL) {
-      if (GetNodeData(tempNext) == target) {
-          return valIndex;
-      }
-      //we have not found a match, so move forwards
-      tempNext = GetNext(tempNext);
-      valIndex ++;
+  list.lstruct->head = list.lstruct->tail = NULL;
+  list.lstruct->listLength = 0;
+  // Dummy Node - Secret Node hidden from the user, used to eliminate test cases
+  Node* dummy = malloc(sizeof(Node));
+  if (dummy == NULL) {
+    *errorCode = 1;
+    free(list.lstruct);
+    return list; 
   }
-  return -1;
+  dummy->key = -1;
+  dummy->next = NULL;
+  list.lstruct->head = list.lstruct->tail = dummy;
 
+  return list;
 }
 
-void deallocate(IntNode* head) {
-  /* Going down the line to the right, freeing everything behind us */
-  IntNode* temp = head;
-  while (temp->nextNodePtr != NULL) {
-    temp = temp -> nextNodePtr;
-    free(head);
-    head = temp; 
+List deleteList(List list) {
+  Node *t = list.lstruct->head;
+  while (t->next != NULL) {
+    t = t->next;
+    free(list.lstruct->head);
+    list.lstruct->head = t;
   }
-  //Head contains NULL
-  free(head); 
+  free(list.lstruct->head);
+  list.lstruct->head = list.lstruct->tail = NULL;
+  list.lstruct->listLength = 0;
 
+  free(list.lstruct);
+  list.lstruct = NULL;
+  return list;
 }
 
-int returnLength(IntNode* head) {
-  int count = 0;
-  IntNode* temp = head;
-  while (temp->nextNodePtr != NULL) {
-    count ++;
-    temp = GetNext(temp);
+int appendFront(List list, int value) {
+  Node* newNode = InitializeNode(value);
+  if (newNode == NULL) {
+    // Failure to allocate memory
+    return 0;
   }
-  return count;
+  if (list.lstruct->head->next == NULL) {
+    // This is the first value that we are adding in, we will need to update the tail
+    list.lstruct->tail = newNode;
+  }
+  newNode->next = list.lstruct->head->next;
+  list.lstruct->head->next = newNode;
+  list.lstruct->listLength = 0;
+
+  return 1;
 
 }
+int appendBack(List list, int value);
+int removeFront(List list);
+int removeBack(List list);
+
+Node* InitializeNode(int dataInit) {
+  Node* newNode = malloc(sizeof(Node));
+  if (newNode == NULL) {
+    return NULL;
+  }
+  newNode->key = dataInit;
+  newNode->next = NULL;
+  return newNode;
+}
+
+int IndexOf(List list, int target);
+int returnLength(List list);
+void removeElement(List, int target_val);
+void defaultSearch();
+void printList(List);
