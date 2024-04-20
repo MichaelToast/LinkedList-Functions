@@ -97,7 +97,7 @@ void printQueue(Queue q) {
   doubleNode* temp = q.qstruct->head->next;
   printf("Queue: ");
   while (temp != NULL) {
-    printf("[%d]", temp->key);
+    printf("[%f]", temp->key);
     temp = temp->next;
   }
   printf("\n");

@@ -2,7 +2,7 @@
 #include <stdlib.h>
 
 typedef struct doubleNode {
-  int key;
+  double key;
   struct doubleNode* next;
 } doubleNode;
 

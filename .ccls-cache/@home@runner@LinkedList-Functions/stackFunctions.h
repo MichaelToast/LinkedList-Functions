@@ -8,17 +8,18 @@ typedef struct cStruct {
 
 typedef struct {
   charNode *head, *tail;
-  int listLength; 
+  int stackLength; 
 } sInfo; 
 
 typedef struct strctStruct{
   sInfo *sStruct;
 } Stack;
 
-Stack initalizeStack(int *);
-Stack deleteStack(Stack);
-int push(void *, Stack);
-void * pop(Stack);
-int getStackSize(Stack);
-void printStack(Stack);
+Stack initalizeStack(int *errorCode);
+Stack deleteStack(Stack s);
+charNode* InitalizeCharNode(char key);
+int push(Stack s,char c);
+char pop(Stack s);
+int getStackSize(Stack s);
+void printStack(Stack s);
 
