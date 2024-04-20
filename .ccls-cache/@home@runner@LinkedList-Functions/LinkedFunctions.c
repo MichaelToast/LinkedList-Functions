@@ -176,9 +176,7 @@ int removeElement(List list, int targetVal, int* errorCode) {
 
   key = temp->key;
   prev->next = temp->next;
-
   free(temp);
-
   list.lstruct->listLength --;
   
   return key;
@@ -192,4 +190,43 @@ void printList(List list) {
     temp = temp->next;
   }
   printf("\n");
+}
+
+void iterativeReverse(List list) {
+  Node* dummy = list.lstruct->head;
+  Node* newTail = list.lstruct->head->next;
+
+  Node* prev = NULL;
+  Node* temp = list.lstruct->head->next; // we want to keep the dummy
+  Node* next = NULL;
+  
+  while (temp != NULL) { 
+    next = temp->next;
+    temp->next = prev;
+
+    prev = temp;
+    temp = next;
+  }
+  //I need to keep the dummy with the head  
+  dummy->next = prev;
+  list.lstruct->tail = newTail;
+
+  return;
+  
+}
+
+int loop(List list) {
+  Node* slow = list.lstruct->head->next; // Jumping by 1
+  Node* fast = list.lstruct->head->next; // Jumping by 2
+
+  while (slow != NULL && fast != NULL && fast->next != NULL) {
+    slow = slow->next;
+    fast = fast->next->next;
+    if (slow == fast) {
+      // This is a loop, the pointers have caught up to each other
+      return 1;
+    }
+
+  }
+  return 0;
 }

@@ -29,3 +29,5 @@ int IndexOf(List list, int target);
 int returnLength(List list);
 int removeElement(List, int targetVal, int *errorCode);
 void printList(List);
+void iterativeReverse(List list);
+int loop(List list);
