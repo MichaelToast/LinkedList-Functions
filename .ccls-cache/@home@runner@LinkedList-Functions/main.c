@@ -23,6 +23,16 @@ int main() {
 
   printList(list);
   
+  appendBack(list, 200);
+  printList(list);
+  
+  removeBack(list, &errorCode);
+  appendBack(list, 900);
+  printList(list);
+
+  IndexOf(list, 9);
+  
+  
   
   deleteList(list);
 
