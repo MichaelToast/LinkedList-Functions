@@ -19,9 +19,6 @@ int main() {
   iterativeReverse(list);
   printList(list);
 
-  
-  
-  
   deleteList(list);
 
   return 0;

@@ -8,13 +8,11 @@ Stack initalizeStack(int *errorCode) {
   Stack s;
   s.sStruct = malloc(sizeof(sInfo));
   if (s.sStruct == NULL) {
-    printf("COULD NOT ALLOCATE MEMORY\n");
     return s;
   }
 
   charNode* dummy = InitalizeCharNode('\0');
   if (dummy == NULL) {
-    printf("COULD NOT ALLOCATE MEMORY\n");
     free(s.sStruct);
     return s;      
   }
