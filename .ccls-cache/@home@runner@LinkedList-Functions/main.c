@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "LinkedFunctions.h"
+#include "queueFunctions.h"
 
 
 int main() {

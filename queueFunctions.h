@@ -1,9 +1,13 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "LinkedFunctions.h" //For Nodes
+
+typedef struct doubleNode {
+  int key;
+  struct doubleNode* next;
+} doubleNode;
 
 typedef struct {
-  Node *head, *tail;
+  doubleNode *head, *tail;
   int qLength; 
 } qInfo; 
 
@@ -13,7 +17,8 @@ typedef struct strctStruct{
 
 Queue initalizeQueue(int *errorCode);
 Queue deleteQueue(Queue q);
-int enqueue(Queue q, int key);
+doubleNode* InitalizeDoubleNode(double key);
+int enqueue(Queue q, double key);
 int dequeue(Queue q, int *errorCode);
 int getQueueSize(Queue q);
 void printQueue(Queue q);

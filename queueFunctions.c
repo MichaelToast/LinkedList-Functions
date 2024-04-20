@@ -11,8 +11,8 @@ Queue initalizeQueue(int *errorCode) {
     return s;
   }
 
-  Node* dummy;
-  dummy = malloc(sizeof(Node));
+  doubleNode* dummy;
+  dummy = malloc(sizeof(doubleNode));
   if (dummy == NULL) {
     printf("COULD NOT ALLOCATE MEMORY\n");
     // Need to free the other allocated thing
@@ -20,7 +20,7 @@ Queue initalizeQueue(int *errorCode) {
     return s;      
   }
   dummy->next = NULL;
-  dummy->key = -1;
+  dummy->key = -1.00;
 
   s.qstruct->head = s.qstruct->tail = dummy;
   s.qstruct->qLength = 0;
@@ -28,7 +28,7 @@ Queue initalizeQueue(int *errorCode) {
 }
 
 Queue deleteQueue(Queue q) {
-  Node* temp = q.qstruct->head; 
+  doubleNode* temp = q.qstruct->head; 
   if (q.qstruct->head ==NULL) {
     return q;
   }
@@ -42,10 +42,20 @@ Queue deleteQueue(Queue q) {
   return q;
 }
 
+doubleNode *InitalizeDoubleNode(double key) {
+  doubleNode* newNode = malloc(sizeof(doubleNode));
+  if (newNode == NULL) {
+    return NULL;
+  }
+  newNode->key = key;
+  newNode->next = NULL;
+  return newNode;
+}
 
-int enqueue(Queue q, int key) {
+
+int enqueue(Queue q, double key) {
   // Add to the tail
-  Node* newNode = InitializeNode(key);
+  doubleNode* newNode = InitalizeDoubleNode(key);
   if (newNode == NULL) {
     return 0; 
   }
@@ -54,15 +64,12 @@ int enqueue(Queue q, int key) {
   q.qstruct->qLength ++;
 
   return 1;
-
-
 }
 
 
 int dequeue(Queue q, int *errorCode) {
   //remove from the head
-  // Returns the integer of the item we have just removed
-  Node * temp = NULL;
+  doubleNode * temp = NULL;
   int key = 0;
 
   if (q.qstruct->head->next == NULL) {
@@ -87,12 +94,11 @@ int getQueueSize(Queue q) {
 }
 
 void printQueue(Queue q) {
-  Node* temp = q.qstruct->head->next;
+  doubleNode* temp = q.qstruct->head->next;
   printf("Queue: ");
   while (temp != NULL) {
     printf("[%d]", temp->key);
     temp = temp->next;
   }
   printf("\n");
-  
 }
