@@ -67,8 +67,8 @@ int enqueue(Queue q, double key) {
 }
 
 
-int dequeue(Queue q, int *errorCode) {
-  //remove from the head
+double dequeue(Queue q, int *errorCode) {
+  //remove from the head, return the key we removed
   doubleNode * temp = NULL;
   int key = 0;
 

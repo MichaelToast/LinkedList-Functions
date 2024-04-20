@@ -19,6 +19,6 @@ Queue initalizeQueue(int *errorCode);
 Queue deleteQueue(Queue q);
 doubleNode* InitalizeDoubleNode(double key);
 int enqueue(Queue q, double key);
-int dequeue(Queue q, int *errorCode);
+double dequeue(Queue q, int *errorCode);
 int getQueueSize(Queue q);
 void printQueue(Queue q);
