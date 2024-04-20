@@ -2,73 +2,36 @@
 #include <stdlib.h>
 #include "LinkedFunctions.h"
 
-
+/*
 void printList(IntNode* head);
 void iterativeReverse(IntNode** head);
 void swapElements(IntNode* head, IntNode* targetOne, IntNode* targetTwo);
 IntNode* recursiveReverse(IntNode* head);
 int loop(IntNode* head);
+*/
 
 int main() {
-  IntNode* headNode;
-  IntNode* currNode;
-  IntNode* lastNode;
-  int index;
-  int length;
+  int errorCode = 0;
+  List list = initalizeList(&errorCode);
+  if (errorCode == 0) {
+    printf("THERE HAS BEEN AN ERROR\n");    
+    return 1;
+  }
+  for (int i = 0; i < 5; i ++) {
+    appendFront(list, (i * 2));
+  }
 
-  // Initiaize head node
-  headNode = (IntNode*)malloc(sizeof(IntNode));
-  InitializeIntNode(-1, headNode);
-  lastNode = headNode;
-
-  // Add nodes to the list
-  for (int i = 0; i < 5; ++i) {
-     currNode = (IntNode*)malloc(sizeof(IntNode));
-     InitializeIntNode(i, currNode);
-     InsertAfter(lastNode, currNode);
-     lastNode = currNode;
-  }
-  /* making the list a loop for the purpose of testing */
-  // lastNode->nextNodePtr = ((headNode->nextNodePtr)->nextNodePtr)->nextNodePtr;
-  if (loop(headNode)) {
-    printf("Loop detected\n");;
-  }
-  else {
-    printf("No loop detected\n");
-  }
+  printList(list);
   
+  
+  deleteList(list);
 
-  //printList(headNode);
-  //printf("Reversing...\n");
-  //iterativeReverse(&headNode);
-  //recursiveReverse(headNode);
-  //printList(lastNode);
-  deallocate(headNode);
   return 0;
 }
 
 
-
-
-void printList(IntNode* head) {
-  int index = 0;
-  IntNode* temp = head;
-  while (temp != NULL) {
-    printf("%d\n", GetNodeData(temp));
-    temp = GetNext(temp);
-    index ++;
-
-    if (index > 20) {
-      // THIS IS ONLY HERE FOR TESTING PURPOSES. PLEASE REMOVE
-      printf("MISTAKES HAVE BEEN MADE\n");
-      break;
-    }
-  }
-  if (index == 0) {
-    printf("List is empty\n");
-  }
-}
-
+// Will update these functions later: 
+/*
 void iterativeReverse(IntNode** head) {
   IntNode* prev = NULL;
   IntNode* current = *head;
@@ -96,7 +59,7 @@ IntNode* recursiveReverse(IntNode* head) {
   return rest;
 }
 
-/* Function to test if the linked list is a giant loop */
+Function to test if the linked list is a giant loop
 int loop(IntNode* head) {
   IntNode* slow = head; // Jumping by 1
   IntNode* fast = head; // Jumping by 2
@@ -111,3 +74,4 @@ int loop(IntNode* head) {
   }
   return 0;
 }
+*/

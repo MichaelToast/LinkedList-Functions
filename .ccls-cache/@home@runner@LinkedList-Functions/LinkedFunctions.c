@@ -8,7 +8,7 @@ List initalizeList(int* errorCode) {
   list.lstruct = malloc(sizeof(listInfo));
   if (list.lstruct == NULL) {
     //Failed to allocate memory
-    *errorCode = 1;
+    *errorCode = 0;
     return list;
   }
 
@@ -17,13 +17,14 @@ List initalizeList(int* errorCode) {
   // Dummy Node - Secret Node hidden from the user, used to eliminate test cases
   Node* dummy = malloc(sizeof(Node));
   if (dummy == NULL) {
-    *errorCode = 1;
+    *errorCode = 0;
     free(list.lstruct);
     return list; 
   }
   dummy->key = -1;
   dummy->next = NULL;
   list.lstruct->head = list.lstruct->tail = dummy;
+  *errorCode = 1;
 
   return list;
 }
@@ -57,12 +58,29 @@ int appendFront(List list, int value) {
   newNode->next = list.lstruct->head->next;
   list.lstruct->head->next = newNode;
   list.lstruct->listLength = 0;
+  list.lstruct->listLength ++;
 
   return 1;
 
 }
-int appendBack(List list, int value);
-int removeFront(List list);
+
+
+int appendBack(List list, int value) {
+  Node* newNode = InitializeNode(value);
+  if (newNode == NULL) {
+    return 0; 
+  }
+  list.lstruct->tail->next = newNode;
+  list.lstruct->tail = newNode;
+  list.lstruct->listLength ++;
+
+  return 1;
+}
+
+int removeFront(List list) {
+  return 0;
+}
+
 int removeBack(List list);
 
 Node* InitializeNode(int dataInit) {
@@ -79,4 +97,12 @@ int IndexOf(List list, int target);
 int returnLength(List list);
 void removeElement(List, int target_val);
 void defaultSearch();
-void printList(List);
+
+void printList(List list) {
+  Node* temp = list.lstruct->head->next;
+  while (temp != NULL) {
+    printf("[%d]", temp->key);
+    temp = temp->next;
+  }
+  printf("\n");
+}
