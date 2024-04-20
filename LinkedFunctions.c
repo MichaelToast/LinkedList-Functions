@@ -178,6 +178,9 @@ int removeElement(List list, int targetVal, int* errorCode) {
   prev->next = temp->next;
 
   free(temp);
+
+  list.lstruct->listLength --;
+  
   return key;
   
 }
