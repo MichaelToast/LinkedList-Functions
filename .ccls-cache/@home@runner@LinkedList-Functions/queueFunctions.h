@@ -4,7 +4,7 @@
 
 typedef struct {
   Node *head, *tail;
-  int listLength; 
+  int qLength; 
 } qInfo; 
 
 typedef struct strctStruct{
@@ -14,6 +14,6 @@ typedef struct strctStruct{
 Queue initalizeQueue(int *errorCode);
 Queue deleteQueue(Queue q);
 int enqueue(Queue q, int key);
-int dequeue(Queue q);
+int dequeue(Queue q, int *errorCode);
 int getQueueSize(Queue q);
 void printQueue(Queue q);
